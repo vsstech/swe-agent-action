@@ -21,7 +21,7 @@ runs:
 
     - name: Install SWE Agent
       run: |
-        pip install git+https://github.com/vsstech/swe-agent.git
+        pip install -e git+https://github.com/vsstech/swe-agent.git
       shell: bash
 
     - name: Run SWE Agent
