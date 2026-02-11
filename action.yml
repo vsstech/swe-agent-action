@@ -1,0 +1,32 @@
+name: "SWE Agent"
+description: "Agentic software engineering assistant for test coverage and code quality"
+
+inputs:
+  goal:
+    description: "Agent goal"
+    required: true
+    default: "Improve test coverage to 80%"
+
+  python-version:
+    description: "Python version"
+    required: false
+    default: "3.12"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install SWE Agent
+      run: |
+        pip install git+https://github.com/vsstech/swe-agent.git
+      shell: bash
+
+    - name: Run SWE Agent
+      run: |
+        swe-agent \
+          --repo-path . \
+          --goal "${{ inputs.goal }}"
+      shell: bash
